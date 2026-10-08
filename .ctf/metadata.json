@@ -1,0 +1,14 @@
+{
+  "title": "OWASP SKF CORS Misconfiguration",
+  "description": "A Flask application (login admin/admin) whose /confidential page holds private data and answers cross-origin requests with credentials allowed.",
+  "question": "Read the logged-in victim's confidential data from a page on another origin by abusing the CORS policy.",
+  "category": "WEB",
+  "difficulty": 2,
+  "evidence_kind": "SECRET",
+  "capabilities": [
+    "cors",
+    "misconfiguration",
+    "client-side",
+    "session"
+  ]
+}
