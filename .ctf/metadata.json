@@ -4,11 +4,5 @@
   "question": "Read the logged-in victim's confidential data from a page on another origin by abusing the CORS policy.",
   "category": "WEB",
   "difficulty": 2,
-  "evidence_kind": "SECRET",
-  "capabilities": [
-    "cors",
-    "misconfiguration",
-    "client-side",
-    "session"
-  ]
+  "evidence_kind": "SECRET"
 }
