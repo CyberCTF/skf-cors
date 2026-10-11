@@ -1,0 +1,41 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Read the victim's confidential data cross-origin and retrieve the flag (/ctf/flag).",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-skf-cors}",
+      "hints": [
+        "Look at the Access-Control response headers of the confidential page.",
+        "Read about CORS misconfigurations with credentials allowed."
+      ],
+      "steps": [
+        {
+          "key": "route",
+          "title": "Find the data",
+          "prompt": "Which route holds the private data? (path)",
+          "check": {
+            "answer": [
+              "/confidential",
+              "confidential"
+            ]
+          }
+        },
+        {
+          "key": "header",
+          "title": "Find the policy",
+          "prompt": "Which response header allows credentials cross-origin?",
+          "check": {
+            "answer": [
+              "access-control-allow-credentials"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
