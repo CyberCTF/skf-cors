@@ -1,8 +1,11 @@
 {
+  "project_name": "cyberlabs-skf-cors",
+  "slug": "skf-cors",
   "title": "OWASP SKF CORS Misconfiguration",
   "description": "A Flask application (login admin/admin) whose /confidential page holds private data and answers cross-origin requests with credentials allowed.",
-  "question": "Read the logged-in victim's confidential data from another origin by abusing the CORS policy (login admin/admin). The flag is in /ctf/flag; client-side lab.",
-  "category": "WEB",
+  "category": "web",
   "difficulty": 2,
-  "evidence_kind": "SECRET"
+  "evidence_kind": "SECRET",
+  "capabilities": [],
+  "question": "Read the logged-in victim's confidential data from another origin by abusing the CORS policy (login admin/admin). The flag is in /ctf/flag; client-side lab."
 }

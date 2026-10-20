@@ -8,22 +8,31 @@ version: 1
 name: skf-cors
 
 # Given by the CyberCTF launcher: this player's flag. Without it the development flag.
-inputs: [CTF_FLAG_MAIN]
+inputs:
+  CTF_FLAG_MAIN: {}
 
 networks:
-  lab: { cidr: 10.60.150.0/24, internet: false }
+  lab: {cidr: 10.60.150.0/24, internet: false}
 
 machines:
   web:
-    networks: { lab: 10 }
-    services: [{ port: 5000, name: web, http: true, publish: 5050 }]
-    resources: { cpus: 1, memory_mb: 256 }
-    inputs: [CTF_FLAG_MAIN]
-    volumes: { ctf: /ctf }   # the flag, written by ctf/flag.sh at every start
-    docker:
-      build: app
-      dockerfile: build/web/Dockerfile
-      init: [ctf/flag.sh]
+    networks: {lab: 10}
+    resources: {cpus: 1, memory_mb: 256}
+    volumes: {ctf: /ctf}     # the flag, written by ctf/flag.sh at every start
+    ports:
+      web:
+        port: 5000
+        protocol: http
+        publish: true
+    files:
+      - path: /run/lab/ctf_flag_main
+        input: CTF_FLAG_MAIN
+    setup:
+      - ctf/flag.sh
+    app:
+      build:
+        context: app
+        dockerfile: app/Dockerfile.lab
 
 checks:
   - name: the lab answers
@@ -33,5 +42,5 @@ checks:
     script: checks/cors.sh
 
 message: |
-  OWASP SKF CORS Misconfiguration answers at http://localhost:{{ machines.web.services.0.publish }}/.
+  OWASP SKF CORS Misconfiguration answers at {{ machines.web.ports.web.url }}.
   Log in with admin/admin and look at the CORS headers of /confidential.
